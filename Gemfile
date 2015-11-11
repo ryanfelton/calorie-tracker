@@ -15,8 +15,11 @@ gem 'uglifier', '~> 2.7'
 
 group :development, :test do
   gem 'byebug'
+  gem 'database_cleaner'
   gem 'factory_girl_rails'
+  gem 'guard-rspec'
   gem 'rspec-rails', '~> 3.0'
+  gem "shoulda-matchers", require: false
 end
 
 group :development do
