@@ -1,18 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe "meals/show", type: :view do
+  let(:meal) { FactoryGirl.create(:meal) }
+
   before(:each) do
-    @meal = assign(:meal, Meal.create!(
-      :user => nil,
-      :name => "MyText",
-      :number_of_calories => 1
-    ))
+    @meal = assign(:meal, meal)
   end
 
   it "renders attributes in <p>" do
     render
     expect(rendered).to match(//)
-    expect(rendered).to match(/MyText/)
-    expect(rendered).to match(/1/)
+    expect(rendered).to match(/#{meal.user.email}/)
+    expect(rendered).to match(/#{meal.name}/)
+    expect(rendered).to match(/#{meal.number_of_calories}/)
   end
 end

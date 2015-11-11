@@ -3,7 +3,6 @@ h1 Listing meals
 table
   thead
     tr
-      th User
       th Name
       th Number of calories
       th Consumed at
@@ -14,7 +13,6 @@ table
   tbody
     - @meals.each do |meal|
       tr
-        td = meal.user
         td = meal.name
         td = meal.number_of_calories
         td = meal.consumed_at

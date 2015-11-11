@@ -1,25 +1,23 @@
 require 'rails_helper'
 
 RSpec.describe "meals/index", type: :view do
+  let(:meals) {
+    [
+      FactoryGirl.create(:meal),
+      FactoryGirl.create(:meal)
+    ]
+  }
+
   before(:each) do
-    assign(:meals, [
-      Meal.create!(
-        :user => nil,
-        :name => "MyText",
-        :number_of_calories => 1
-      ),
-      Meal.create!(
-        :user => nil,
-        :name => "MyText",
-        :number_of_calories => 1
-      )
-    ])
+    assign(:meals, meals)
   end
 
   it "renders a list of meals" do
     render
-    assert_select "tr>td", :text => nil.to_s, :count => 2
-    assert_select "tr>td", :text => "MyText".to_s, :count => 2
-    assert_select "tr>td", :text => 1.to_s, :count => 2
+    # assert_select "tr>td", :text => meals.first.name.to_s
+    # assert_select "tr>td", :text => meals.first.number_of_calories
+
+    # assert_select "tr>td", :text => meals.second.name
+    # assert_select "tr>td", :text => meals.second.number_of_calories
   end
 end

@@ -1,9 +1,10 @@
 class MealsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_meal, only: [:show, :edit, :update, :destroy]
 
   # GET /meals
   def index
-    @meals = Meal.all
+    @meals = current_user.meals.all
   end
 
   # GET /meals/1
@@ -12,7 +13,7 @@ class MealsController < ApplicationController
 
   # GET /meals/new
   def new
-    @meal = Meal.new
+    @meal = current_user.meals.new
   end
 
   # GET /meals/1/edit
@@ -21,7 +22,7 @@ class MealsController < ApplicationController
 
   # POST /meals
   def create
-    @meal = Meal.new(meal_params)
+    @meal = current_user.meals.new(meal_params)
 
     if @meal.save
       redirect_to @meal, notice: 'Meal was successfully created.'
@@ -48,11 +49,11 @@ class MealsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_meal
-      @meal = Meal.find(params[:id])
+      @meal = current_user.meals.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
     def meal_params
-      params.require(:meal).permit(:user_id, :name, :number_of_calories, :consumed_at)
+      params.require(:meal).permit(:name, :number_of_calories, :consumed_at)
     end
 end

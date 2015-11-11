@@ -19,22 +19,29 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe MealsController, type: :controller do
+  let(:user) { FactoryGirl.create(:user) }
 
   # This should return the minimal set of attributes required to create a valid
   # Meal. As you add validations to Meal, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    FactoryGirl.attributes_for(:meal, user_id: user.id)
+    # skip("Add a hash of attributes valid for your model")
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    FactoryGirl.attributes_for(:meal, name: nil, user_id: user.id)
+    # skip("Add a hash of attributes invalid for your model")
   }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # MealsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
+
+  before do
+    sign_in user
+  end
 
   describe "GET #index" do
     it "assigns all meals as @meals" do
@@ -103,14 +110,15 @@ RSpec.describe MealsController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        FactoryGirl.attributes_for(:meal, user_id: user.id)
+        # skip("Add a hash of attributes valid for your model")
       }
 
       it "updates the requested meal" do
         meal = Meal.create! valid_attributes
         put :update, {:id => meal.to_param, :meal => new_attributes}, valid_session
         meal.reload
-        skip("Add assertions for updated state")
+        # skip("Add assertions for updated state")
       end
 
       it "assigns the requested meal as @meal" do
