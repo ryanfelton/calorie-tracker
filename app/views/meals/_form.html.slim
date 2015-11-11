@@ -1,0 +1,11 @@
+= simple_form_for(@meal) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.association :user
+    = f.input :name
+    = f.input :number_of_calories
+    = f.input :consumed_at
+
+  .form-actions
+    = f.button :submit

@@ -1,0 +1,27 @@
+h1 Listing meals
+
+table
+  thead
+    tr
+      th User
+      th Name
+      th Number of calories
+      th Consumed at
+      th
+      th
+      th
+
+  tbody
+    - @meals.each do |meal|
+      tr
+        td = meal.user
+        td = meal.name
+        td = meal.number_of_calories
+        td = meal.consumed_at
+        td = link_to 'Show', meal
+        td = link_to 'Edit', edit_meal_path(meal)
+        td = link_to 'Destroy', meal, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Meal', new_meal_path
