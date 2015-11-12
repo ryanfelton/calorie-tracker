@@ -19,8 +19,8 @@ body
   .header.clearfix
     nav
       ul.nav.nav-pills.pull-right
-        li.active role="presentation" 
-          / = link_to t("nav.home"), root_path
+        li role="presentation" 
+          = link_to t("nav.home"), root_path
         - if user_signed_in?
           li role="presentation" 
             = link_to t("nav.my_profile"), edit_user_registration_path(:user)
