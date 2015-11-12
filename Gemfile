@@ -5,13 +5,13 @@ ruby "2.2.3"
 gem 'rails', '4.2.4'
 
 gem 'coffee-rails'
+gem 'bootstrap-sass'
 gem 'devise'
 gem 'jquery-rails'
 gem 'pg'
 gem 'sass-rails'
 gem 'simple_form'
 gem 'slim-rails'
-gem 'turbolinks'
 gem 'uglifier'
 
 group :development, :test do

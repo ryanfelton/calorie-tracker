@@ -1,6 +1,6 @@
 h1 Listing meals
 
-table
+table.table
   thead
     tr
       th Name
@@ -10,7 +10,7 @@ table
       th
       th
 
-  tbody
+  tbody.table-hover
     - @meals.each do |meal|
       tr
         td = meal.name
@@ -20,6 +20,14 @@ table
         td = link_to 'Edit', edit_meal_path(meal)
         td = link_to 'Destroy', meal, data: {:confirm => 'Are you sure?'}, :method => :delete
 
+  thead
+    tr
+      th Total Calories
+      th = @meals.sum(:number_of_calories)
+      th 
+      th
+      th
+      th
 br
 
 = link_to 'New Meal', new_meal_path

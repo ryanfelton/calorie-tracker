@@ -20,4 +20,9 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  app_name: Calorie Tracker
+  nav:
+    home: Home
+    login: Login
+    sign_up: Sign Up
+    sign_out: Sign Out

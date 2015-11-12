@@ -1,0 +1,39 @@
+doctype html
+html
+head
+  meta charset="utf-8"
+  meta name="ROBOTS" content="NOINDEX, NOFOLLOW"
+  meta name="viewport" content="initial-scale=1"
+  meta name="apple-mobile-web-app-capable" content="yes"
+  meta name="apple-mobile-web-app-title" content="Calorie Tracker"
+
+  title
+    | Calorie Tracker
+  = stylesheet_link_tag :application, media: "all"
+  = javascript_include_tag 'application'
+  = csrf_meta_tags
+
+
+body
+.container
+  .header.clearfix
+    nav
+      ul.nav.nav-pills.pull-right
+        li.active role="presentation" 
+          = link_to t("nav.home"), root_path
+        - if user_signed_in?
+          li role="presentation" 
+            = link_to t("nav.sign_out"), destroy_session_path(:user), method: :delete
+
+        - else
+          li role="presentation"
+            = link_to t("nav.sign_up"), new_user_registration_path
+          li role="presentation" 
+            = link_to t("nav.login"), new_user_session_path
+    h3.text-muted 
+      = t("app_name")
+
+  = yield
+
+  / footer.footer
+  /   p Created by Ryan Felton
