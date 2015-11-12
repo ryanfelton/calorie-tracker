@@ -23,6 +23,7 @@ en:
   app_name: Calorie Tracker
   nav:
     home: Home
+    my_profile: My Profile
     login: Login
     sign_up: Sign Up
     sign_out: Sign Out

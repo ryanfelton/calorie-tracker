@@ -16,6 +16,7 @@ gem 'uglifier'
 
 group :development, :test do
   gem 'byebug'
+  gem 'capybara'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'guard-rspec'
