@@ -10,4 +10,11 @@ class ApiController < ActionController::Base
       ApiKey.exists?(api_key: @key)
     end
   end
+
+  def api_user
+    authenticate_or_request_with_http_token do |key, options|
+      @key = key
+      ApiKey.where(api_key: @key).first.user
+    end
+  end
 end

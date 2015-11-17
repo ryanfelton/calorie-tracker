@@ -15,7 +15,7 @@
 
     <div class="col-xs-2">
       Calories per Day:<br />
-      <input type="text" class="form-control" >
+      <input type="text" class="form-control" type="number" min="0" data-ng-model="vm.caloriesPerDay">
     </div>
 
 
@@ -49,16 +49,19 @@
   <div class="panel panel-default col-xs-12">
 
     <div class="row panel-heading">
-      <div class="col-xs-3">
+      <div class="col-xs-1">
+        User ID
+      </div>
+      <div class="col-xs-4">
         Name
       </div>
-      <div class="col-xs-3">
+      <div class="col-xs-2">
         Number of Calories
       </div>
       <div class="col-xs-3">
         Mealtime
       </div>
-      <div class="col-xs-3">
+      <div class="col-xs-2">
         <button ng-click="vm.new()" type="button" class="btn btn-success">
           <i class="fa fa-plus-circle fa-lg"></i>
           New
@@ -84,16 +87,19 @@
           class="list-group-item row">
 
           <span ng-if="meal != vm.editedMealMarker">
-            <div class="col-xs-3 meal_name">
+            <div class="col-xs-1 meal_user_id" >
+              {{ meal.user_id }}
+            </div>
+            <div class="col-xs-4 meal_name">
               {{ meal.name }}
             </div>
-            <div class="col-xs-3 meal_number_of_calories">
+            <div class="col-xs-2 meal_number_of_calories">
               {{ meal.number_of_calories | number }}
             </div>
             <div class="col-xs-3 meal_consumed_at">
               {{ meal.consumed_at | date : 'mediumDate' }} {{ meal.consumed_at | date : 'mediumTime' }}
             </div>
-            <div class="col-xs-3 meal_actions">
+            <div class="col-xs-2 meal_actions">
               <button ng-click="vm.edit(meal)" type="button" class="btn meal_edit_action"><i class="fa fa-pencil fa-lg"></i></button>
               <button confirmed-click="vm.destroy(meal)" confirm-click="Are you sure?" type="button" class="btn btn-danger meal_delete_action"><i class="fa fa-trash-o fa-lg"></i>
               </button>
