@@ -11,7 +11,18 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery_ujs
-//= require_tree .
 
-//= require bootstrap-sprockets
+//= require twitter/bootstrap
+
+//= require angular
+//= require angular-messages
+//= require angular-resource
+//= require angular-rails-templates
+//= require angular-ui-bootstrap-tpls
+
+//= require moment
+//= require daterangepicker
+
+//= require vendor
+
+//= require_tree .

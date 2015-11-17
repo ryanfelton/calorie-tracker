@@ -8,6 +8,8 @@ RSpec.describe User, type: :model do
 
   it { expect(FactoryGirl.create(:user)).to be_valid }
 
+  it { expect(FactoryGirl.create(:user).api_keys.count).to eq 1 }
+
   describe "#meals" do
     let!(:user) { FactoryGirl.create(:user) }
     let!(:user2) { FactoryGirl.create(:user) }
@@ -31,6 +33,6 @@ RSpec.describe User, type: :model do
         expect(admin.meals).to include(meal2)
       end
     end
-
   end
+
 end

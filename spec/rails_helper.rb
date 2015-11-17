@@ -7,7 +7,6 @@ require 'spec_helper'
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
-require "devise"
 require "shoulda/matchers"
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -55,7 +54,12 @@ RSpec.configure do |config|
 
 
   ########## BEGIN CUSTOM CONFIGURATIONS ##########
-  config.include Devise::TestHelpers, type: :controller
+  Capybara.register_driver :selenium_chrome do |app|
+    Capybara::Selenium::Driver.new(app, :browser => :chrome)
+  end
+  Capybara.current_driver = :selenium_chrome
+  Capybara.javascript_driver = :selenium_chrome
+
   ########## END CUSTOM CONFIGURATIONS ##########
 
 

@@ -1,10 +1,8 @@
 class User < ActiveRecord::Base
+  after_create :create_initial_api_key
+  has_secure_password
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
-
+  has_many :api_keys
   has_many :meals
 
   validates :email, presence: true, uniqueness: true
@@ -13,11 +11,13 @@ class User < ActiveRecord::Base
   # Typically I would do this via roles; however, given the simpliest of the
   # current scope, I've overriden the getter assocation
   def meals
-    admin ? Meal.all : super
+    admin? ? Meal.all : super
   end
 
-  def admin?
-    admin == true
-  end
 
+  private
+
+  def create_initial_api_key
+    api_keys.create if api_keys.blank?
+  end
 end

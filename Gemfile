@@ -2,13 +2,20 @@ source 'https://rubygems.org'
 
 ruby "2.2.3"
 
-gem 'rails', '4.2.4'
+gem 'rails', '4.2.5'
+
+gem 'bcrypt'
+gem 'angularjs-rails'
+gem 'angular-ui-bootstrap-rails'
+gem 'angular-rails-templates'
+gem 'bootstrap-daterangepicker-rails'
+gem 'momentjs-rails'
+gem 'twitter-bootstrap-rails'
 
 gem 'coffee-rails'
-gem 'bootstrap-sass'
-gem 'devise'
 gem 'jquery-rails'
 gem 'pg'
+gem 'responders', '~> 2.0'
 gem 'sass-rails'
 gem 'simple_form'
 gem 'slim-rails'
@@ -21,7 +28,10 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'guard-rspec'
   gem 'rspec-rails'
-  gem "shoulda-matchers", require: false
+  gem 'shoulda-matchers', require: false
+
+  gem 'capybara-webkit', ">= 1.2.0"
+  gem 'selenium-webdriver'
 end
 
 group :development do

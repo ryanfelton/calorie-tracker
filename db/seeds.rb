@@ -6,13 +6,20 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-User.create(
-  email: "user@example.org",
-  password: "password",
-)
+user = User.where(email: "user@example.org").first_or_create do |u|
+  u.password = "password"
+  u.password_confirmation = "password"
+end
 
-User.create(
-  email: "admin@example.org",
-  password: "password",
-  admin: true,
-)
+user.api_keys.create if user.api_keys.blank?
+
+puts "User Created: #{user.persisted?}"
+
+admin = User.where(email: "admin@example.org").first_or_create do |u|
+  u.password =  "password"
+  u.password_confirmation = "password"
+  u.admin = true
+end
+
+admin.api_keys.create if admin.api_keys.blank?
+puts "Admin Created: #{admin.persisted?}"

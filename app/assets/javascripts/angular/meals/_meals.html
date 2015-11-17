@@ -1,0 +1,110 @@
+<div ng-controller="MealsController as vm">
+
+  <h3>Recent Meals</h3>
+
+  <div class="row">
+    <div class="col-xs-6">
+      Time of Day:<br />
+      <div class="btn-group" style="margin-bottom: 10px;">
+          <label class="btn btn-default" ng-model="vm.timeOfDay" btn-radio="'all'">All</label>
+        <label class="btn btn-default" ng-model="vm.timeOfDay" btn-radio="'breakfast'">Breakfast</label>
+        <label class="btn btn-default" ng-model="vm.timeOfDay" btn-radio="'lunch'">Lunch</label>
+        <label class="btn btn-default" ng-model="vm.timeOfDay" btn-radio="'dinner'">Dinner</label>
+      </div>
+    </div>
+
+    <div class="col-xs-3">
+      Start Date Time:
+      <div class="dropdown">
+        <a class="dropdown-toggle my-toggle-select" id="filterStartDatetime" role="button" data-toggle="dropdown" data-target="#" href="">
+            <div class="input-group"><input type="text" class="form-control input-large" data-ng-model="vm.startDatetime"><span class="input-group-addon"><i class="fa fa-calendar fa-lg"></i></span></div>
+        </a>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="filterStartDatetime">
+            <datetimepicker data-ng-model="vm.startDatetime" data-datetimepicker-config="{ dropdownSelector: '.my-toggle-select' }"></datetimepicker>
+        </ul>
+      </div>
+    </div>
+    <div class="col-xs-3">
+      End Date Time:
+      <div class="dropdown">
+        <a class="dropdown-toggle my-toggle-select" id="filterEndDatetime" role="button" data-toggle="dropdown" data-target="#" href="">
+            <div class="input-group"><input type="text" class="form-control input-large" data-ng-model="vm.endDatetime"><span class="input-group-addon"><i class="fa fa-calendar fa-lg"></i></span></div>
+        </a>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="filterEndDatetime">
+            <datetimepicker data-ng-model="vm.endDatetime" data-datetimepicker-config="{ dropdownSelector: '.my-toggle-select' }"></datetimepicker>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="panel panel-default col-xs-12">
+
+    <div class="row panel-heading">
+      <div class="col-xs-3">
+        Name
+      </div>
+      <div class="col-xs-3">
+        Number of Calories
+      </div>
+      <div class="col-xs-3">
+        Mealtime
+      </div>
+      <div class="col-xs-3">
+        <button ng-click="vm.new()" type="button" class="btn btn-success">
+          <i class="fa fa-plus-circle fa-lg"></i>
+          New
+        </button>
+      </div>
+    </div>
+
+    <ul class="list-group">
+
+      <span ng-if="vm.newMeal">
+        <li class="list-group-item row">
+          <form class="form-inline" ng-submit="vm.create()">
+            <meal-form meal="vm.newMeal"></meal-form>
+            <div class="col-xs-3">
+              <button ng-click="vm.newCancel()" class="btn">Cancel</button>
+              <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+          </form>
+        </li>
+      </span>
+
+      <li ng-repeat="meal in vm.meals | timeOfDayFilter:'consumed_at':vm.timeOfDay | dateRange:'consumed_at':vm.startDatetime:vm.endDatetime | orderBy: '-consumed_at' "
+          class="list-group-item row">
+
+          <span ng-if="meal != vm.editedMealMarker">
+            <div class="col-xs-3 meal_name">
+              {{ meal.name }}
+            </div>
+            <div class="col-xs-3 meal_number_of_calories">
+              {{ meal.number_of_calories | number }}
+            </div>
+            <div class="col-xs-3 meal_consumed_at">
+              {{ meal.consumed_at | date : 'mediumDate' }} {{ meal.consumed_at | date : 'mediumTime' }}
+            </div>
+            <div class="col-xs-3 meal_actions">
+              <button ng-click="vm.edit(meal)" type="button" class="btn meal_edit_action"><i class="fa fa-pencil fa-lg"></i></button>
+              <button confirmed-click="vm.destroy(meal)" confirm-click="Are you sure?" type="button" class="btn btn-danger meal_delete_action"><i class="fa fa-trash-o fa-lg"></i>
+              </button>
+            </div>
+          </span>
+
+          <span ng-if="meal == vm.editedMealMarker">
+            <form class="form-inline" ng-submit="vm.update()">
+              <meal-form meal="vm.clonedMeal"></meal-form>
+              <div class="col-xs-3">
+                <button ng-click="vm.editCancel()" class="btn">Cancel</button>
+                <button type="submit" class="btn btn-primary">Save</button>
+              </div>
+            </form>
+          </span>
+
+      </li> <!-- end ng-repeat -->
+    </ul>
+  </div> <!-- end panel -->
+</div>
