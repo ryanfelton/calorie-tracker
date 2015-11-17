@@ -5,8 +5,10 @@
 
   function MealsController($scope, mealService) {
     var vm = this;
-    vm.startDatetime = "2015-05-01";
-    vm.endDatetime = "2016-12-01";
+    // vm.startDatetime = moment().startOf('week');
+    // vm.endDatetime = moment().endOf('week');
+    vm.startDatetime = moment().subtract(10, 'days');
+    vm.endDatetime = moment().add(1, 'days');
 
     var mealResource = mealService.resourceForUser($scope.currentUserService.getCurrentUser());
 

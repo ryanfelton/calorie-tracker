@@ -21,7 +21,6 @@
 //= require angular-ui-bootstrap-tpls
 
 //= require moment
-//= require daterangepicker
 
 //= require vendor
 

@@ -8,7 +8,6 @@ gem 'bcrypt'
 gem 'angularjs-rails'
 gem 'angular-ui-bootstrap-rails'
 gem 'angular-rails-templates'
-gem 'bootstrap-daterangepicker-rails'
 gem 'momentjs-rails'
 gem 'twitter-bootstrap-rails'
 
